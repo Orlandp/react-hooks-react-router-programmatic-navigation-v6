@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 function Login() {
+  const login = useOutletContext(); // this gets the login function from context
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -15,11 +17,12 @@ function Login() {
 
   function handleLogin(e) {
     e.preventDefault();
+    login(); // <-- call the context function, NOT the component!
   }
 
   return (
     <form onSubmit={handleLogin}>
-      <label for="username">Username</label>
+      <label htmlFor="username">Username</label>
       <div>
         <input
           id="username"
@@ -29,7 +32,7 @@ function Login() {
           onChange={handleChange}
         />
       </div>
-      <label for="password">Password</label>
+      <label htmlFor="password">Password</label>
       <div>
         <input
           id="password"
